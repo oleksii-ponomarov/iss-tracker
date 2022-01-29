@@ -9,7 +9,7 @@ const starsMaterial = new THREE.MeshBasicMaterial({
   map: starsTexture,
   side: THREE.DoubleSide,
   transparent: true,
-  opacity: 0.2,
+  opacity: 0.5,
 });
 const stars = new THREE.Mesh(starsGeometry, starsMaterial);
 
