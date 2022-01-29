@@ -33,6 +33,19 @@ const sizes = {
   height: window.innerHeight,
 };
 
+/**
+ * Camera
+ */
+// Base camera
+const camera = new THREE.PerspectiveCamera(
+  50,
+  sizes.width / sizes.height,
+  0.1,
+  5000
+);
+
+scene.add(camera);
+
 window.addEventListener("resize", () => {
   // Update sizes
   sizes.width = window.innerWidth;
@@ -47,41 +60,30 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(
-  50,
-  sizes.width / sizes.height,
-  0.1,
-  5000
-);
-
-scene.add(camera);
-
 loadingManager.onLoad = async () => {
+  const { coordinates } = await updateIssPosition();
+  onLoad();
+  if (coordinates?.latitude || coordinates?.longitude) {
+    const cameraPosition = convertLatLongToXYZ(
+      40,
+      coordinates.latitude > 0
+        ? Math.min(coordinates.latitude, 20)
+        : Math.max(coordinates.latitude, -20),
+      coordinates.longitude
+    );
+    camera.position.x = cameraPosition.x;
+    camera.position.y = cameraPosition.y;
+    camera.position.z = cameraPosition.z;
+    controls.update();
+    distance = Math.round(controls.getDistance());
+  }
+
   scene.add(earth);
   scene.add(clouds);
   for (const marker of markers) {
     scene.add(marker);
   }
   scene.add(iss);
-  const { coordinates } = await updateIssPosition();
-  onLoad();
-  if (!coordinates?.latitude || !coordinates?.longitude) return;
-  const cameraPosition = convertLatLongToXYZ(
-    40,
-    coordinates.latitude > 0
-      ? Math.min(coordinates.latitude, 20)
-      : Math.max(coordinates.latitude, -20),
-    coordinates.longitude
-  );
-  camera.position.x = cameraPosition.x;
-  camera.position.y = cameraPosition.y;
-  camera.position.z = cameraPosition.z;
-  controls.update();
-  distance = Math.round(controls.getDistance());
 };
 
 // Controls
