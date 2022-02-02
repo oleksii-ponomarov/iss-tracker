@@ -16,20 +16,26 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout branch
+        uses: actions/checkout@v2
       
       - name: Clean install dependencies
         run: npm ci
 
       - name: Building a project
         run: npm run build
+
       - name: Init new repo in dist folder and commit generated files
         run: |
           cd dist
           git init
+          git config --local user.email "rocknrollerr@gmail.com"
+          git config --local user.name "Oleksii Ponomarov"
           git add .
           git commit -m 'deploy initiated by commit: ${{ github.event.head_commit.message }}'
+
       - name: Force push to gh-pages branch
         uses: ad-m/github-push-action@v0.5.0
         with:
