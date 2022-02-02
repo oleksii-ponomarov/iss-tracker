@@ -84,6 +84,8 @@ loadingManager.onLoad = async () => {
   }
 };
 
+console.log("test");
+
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
