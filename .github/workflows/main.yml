@@ -29,10 +29,12 @@ jobs:
 
       - name: Init new repo in dist folder and commit generated files
         run: |
+          name=$(git log --format=format:'%an' -n 1)
+          email=$(git log --format=format:'%ae' -n 1)
           cd dist
           git init
-          git config --local user.email "$(git log --format='%ae' HEAD^!)"
-          git config --local user.name "$(git log --format='%an' HEAD^!)"
+          git config --local user.email "$email"
+          git config --local user.name "$name"
           git add .
           git commit -m 'deploy initiated by commit: ${{ github.event.head_commit.message }}'
 
