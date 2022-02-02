@@ -84,7 +84,7 @@ loadingManager.onLoad = async () => {
   }
 };
 
-console.log("test");
+console.log("another test");
 
 // Controls
 const controls = new OrbitControls(camera, canvas);

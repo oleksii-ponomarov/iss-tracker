@@ -31,8 +31,8 @@ jobs:
         run: |
           cd dist
           git init
-          git config --local user.email "rocknrollerr@gmail.com"
-          git config --local user.name "Oleksii Ponomarov"
+          git config --local user.email "$(git log --format='%ae' HEAD^!)"
+          git config --local user.name "$(git log --format='%an' HEAD^!)"
           git add .
           git commit -m 'deploy initiated by commit: ${{ github.event.head_commit.message }}'
 
