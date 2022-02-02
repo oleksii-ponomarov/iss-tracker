@@ -78,12 +78,10 @@ loadingManager.onLoad = async () => {
     distance = Math.round(controls.getDistance());
   }
 
-  scene.add(earth);
-  scene.add(clouds);
+  scene.add(earth, clouds, iss);
   for (const marker of markers) {
     scene.add(marker);
   }
-  scene.add(iss);
 };
 
 // Controls
