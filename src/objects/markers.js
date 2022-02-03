@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { convertLatLongToXYZ } from "../utils";
 import earth from "./earth";
 import { greenwich, kyiv, newYork } from "../data";
+import { sunLong } from "./light";
 
 const greenwichPosition = convertLatLongToXYZ(
   earth.geometry.parameters.radius,
@@ -40,8 +41,15 @@ newYorkMarker.position.x = newYorkPosition.x;
 newYorkMarker.position.y = newYorkPosition.y;
 newYorkMarker.position.z = newYorkPosition.z;
 
+const sunMarker = new THREE.Mesh(markerGeometry, markerMaterial);
+const sunMarkerPosition = convertLatLongToXYZ(10, 0, sunLong);
+sunMarker.position.x = sunMarkerPosition.x;
+sunMarker.position.y = sunMarkerPosition.y;
+sunMarker.position.z = sunMarkerPosition.z;
+
 export default [
   // greenwichMarker,
   // kyivMarker,
-  // newYorkMarker
+  // newYorkMarker,
+  // sunMarker,
 ];

@@ -9,21 +9,16 @@ import earth, { clouds } from "./objects/earth";
 import stars from "./objects/stars";
 import markers from "./objects/markers";
 import iss, { updateIssPosition } from "./objects/iss";
+import { sun, ambientLight } from "./objects/light";
 
 initializeLoading();
 
 /**
  * Base
  */
-// Canvas
 const canvas = document.querySelector("canvas.webgl");
-
-// Scene
 const scene = new THREE.Scene();
 
-scene.add(stars);
-
-setInterval(updateIssPosition, 5000);
 
 /**
  * Sizes
@@ -36,7 +31,6 @@ const sizes = {
 /**
  * Camera
  */
-// Base camera
 const camera = new THREE.PerspectiveCamera(
   50,
   sizes.width / sizes.height,
@@ -78,13 +72,13 @@ loadingManager.onLoad = async () => {
     distance = Math.round(controls.getDistance());
   }
 
-  scene.add(earth, clouds, iss);
+  scene.add(stars, earth, clouds, iss, sun, ambientLight);
   for (const marker of markers) {
     scene.add(marker);
   }
 };
 
-console.log("another test");
+setInterval(updateIssPosition, 5000);
 
 // Controls
 const controls = new OrbitControls(camera, canvas);
@@ -128,8 +122,6 @@ const tick = () => {
     marker.scale.y += 0.01 * Math.sin(elapsedTime * 2);
     marker.scale.z += 0.01 * Math.sin(elapsedTime * 2);
   }
-  //   earth.rotation.y = (elapsedTime * 0.4) % (2 * Math.PI);
-  //   clouds.rotation.y = (elapsedTime * 0.4) % (2 * Math.PI);
 
   // Update controls
   controls.update();

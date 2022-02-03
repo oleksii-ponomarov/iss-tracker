@@ -12,8 +12,8 @@ loadingManager.onProgress = (fileName, index, total) => {
   loadingBar.style.width = (index / total) * 100 + "%";
 };
 
-loadingManager.onError = () => {
-  console.log("error while loading file");
+loadingManager.onError = (data) => {
+  console.log("error while loading file", data);
 };
 
 export function onLoad() {
