@@ -9,7 +9,7 @@ import earth, { clouds } from "./objects/earth";
 import stars from "./objects/stars";
 import markers from "./objects/markers";
 import iss, { updateIssPosition } from "./objects/iss";
-import { sun, ambientLight } from "./objects/light";
+import { sun, ambientLight, updateSunPosition } from "./objects/light";
 
 initializeLoading();
 
@@ -18,7 +18,6 @@ initializeLoading();
  */
 const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
-
 
 /**
  * Sizes
@@ -79,6 +78,7 @@ loadingManager.onLoad = async () => {
 };
 
 setInterval(updateIssPosition, 5000);
+setInterval(updateSunPosition, 15 * 60 * 1000);
 
 // Controls
 const controls = new OrbitControls(camera, canvas);
