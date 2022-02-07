@@ -10,7 +10,7 @@ import { convertLatLongToXYZ } from "../utils";
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
 
 const sun = new THREE.PointLight(0xffffff, 1);
-const lensTexture = textureLoader.load("/textures/flare.png");
+const lensTexture = textureLoader.load("./textures/flare.png");
 const lensflare = new Lensflare();
 lensflare.addElement(new LensflareElement(lensTexture, 512, 0));
 sun.add(lensflare);
