@@ -5,7 +5,7 @@ import {
 } from "three/examples/jsm/objects/Lensflare";
 
 import { textureLoader } from "../loading/manager";
-import { convertLatLongToXYZ } from "../utils";
+import { convertLatLongToXYZ, getDay, getDaysInYear } from "../utils";
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
 
@@ -22,9 +22,18 @@ export function getSunLong() {
   return (12 - greenwitchHours) * 15;
 }
 
+export function getSunLat() {
+  const day = getDay();
+  const axialTilt = 23.5;
+  const dayRad = (2 * Math.PI) / getDaysInYear();
+  const sunLat = axialTilt * Math.sin(dayRad * day - Math.PI / 2 + 10 * dayRad);
+  return sunLat;
+}
+
 export function updateSunPosition() {
   const sunLong = getSunLong();
-  const sunPosition = convertLatLongToXYZ(300, 0, sunLong);
+  const sunLat = getSunLat();
+  const sunPosition = convertLatLongToXYZ(300, sunLat, sunLong);
   sun.position.x = sunPosition.x;
   sun.position.y = sunPosition.y;
   sun.position.z = sunPosition.z;
