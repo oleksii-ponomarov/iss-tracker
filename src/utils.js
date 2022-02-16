@@ -15,7 +15,6 @@ export function getDay(date) {
     if (date && isNaN(date.getTime())) {
       throw new Error("invalid date");
     }
-
     const start = new Date(
       date ? date.getFullYear() : new Date().getFullYear(),
       0
@@ -32,7 +31,6 @@ export function getDaysInYear(date) {
     if (date && isNaN(date.getTime())) {
       throw new Error("invalid date");
     }
-    
     const februaryLastDate = new Date(
       date ? date.getFullYear() : new Date().getFullYear(),
       2,
