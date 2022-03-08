@@ -30,7 +30,8 @@ const earthCloudsMaterial = new THREE.MeshStandardMaterial({
   alphaMap: earthCloudsAlphaTexture,
   transparent: true,
   side: THREE.DoubleSide,
-  opacity: 0.3
+  opacity: 0.3,
+  depthWrite: false
 });
 export const clouds = new THREE.Mesh(earthCloudsGeometry, earthCloudsMaterial);
 

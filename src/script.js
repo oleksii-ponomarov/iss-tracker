@@ -89,9 +89,9 @@ controls.maxDistance = 80;
 
 let distance = Math.round(controls.getDistance());
 
-function onControlsChange(e) {
+function onControlsChange() {
   if (distance === Math.round(this.getDistance())) return;
-  for (const marker of [...markers, iss]) {
+  for (const marker of markers) {
     marker.scale.x = 0.03 * this.getDistance();
     marker.scale.y = 0.03 * this.getDistance();
     marker.scale.z = 0.03 * this.getDistance();
@@ -118,12 +118,14 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
-  for (const marker of [...markers, iss]) {
+  for (const marker of markers) {
     marker.scale.x += 0.01 * Math.sin(elapsedTime * 2);
     marker.scale.y += 0.01 * Math.sin(elapsedTime * 2);
     marker.scale.z += 0.01 * Math.sin(elapsedTime * 2);
   }
 
+  iss.material.size = 40 + 10 * Math.sin(elapsedTime * 2);
+  
   // Update controls
   controls.update();
 
