@@ -6,8 +6,8 @@ import { textureLoader } from "../loading/manager";
 
 const issApi = "https://api.wheretheiss.at/v1/satellites/25544";
 
-const issColorTexture = textureLoader.load("/textures/iss/color.png");
-const issAlphaTexture = textureLoader.load("/textures/iss/alpha.png");
+const issColorTexture = textureLoader.load("./textures/iss/color.png");
+const issAlphaTexture = textureLoader.load("./textures/iss/alpha.png");
 
 const issGeometry = new THREE.BufferGeometry();
 const points = new Float32Array([0, 0, 0]);
