@@ -88,9 +88,7 @@ loadingManager.onLoad = async () => {
 
 setInterval(async () => {
   const { coordinates } = await updateIssPosition();
-  console.log(previousCoords, coordinates);
   if (previousCoords?.longitude > 0 && coordinates?.longitude < 0) {
-    console.log("achtung!");
     // new orbit
     const issOrbitPoints = await getIssOrbit();
     const issOrbit = plotIssOrbit(issOrbitPoints);
