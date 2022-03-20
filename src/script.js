@@ -8,7 +8,11 @@ import initializeLoading from "./loading/status";
 import earth, { clouds } from "./objects/earth";
 import stars from "./objects/stars";
 import markers from "./objects/markers";
-import iss, { updateIssPosition } from "./objects/iss";
+import iss, {
+  getIssOrbit,
+  plotIssOrbit,
+  updateIssPosition,
+} from "./objects/iss";
 import { sun, ambientLight, updateSunPosition } from "./objects/light";
 
 initializeLoading();
@@ -53,7 +57,12 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
+let previousCoords = null;
+
 loadingManager.onLoad = async () => {
+  const issOrbitPoints = await getIssOrbit();
+  const issOrbit = plotIssOrbit(issOrbitPoints);
+
   const { coordinates } = await updateIssPosition();
   onLoad();
   if (coordinates?.latitude || coordinates?.longitude) {
@@ -71,13 +80,25 @@ loadingManager.onLoad = async () => {
     distance = Math.round(controls.getDistance());
   }
 
-  scene.add(stars, earth, clouds, iss, sun, ambientLight);
+  scene.add(stars, earth, clouds, iss, issOrbit, sun, ambientLight);
   for (const marker of markers) {
     scene.add(marker);
   }
 };
 
-setInterval(updateIssPosition, 5000);
+setInterval(async () => {
+  const { coordinates } = await updateIssPosition();
+  console.log(previousCoords, coordinates);
+  if (previousCoords?.longitude > 0 && coordinates?.longitude < 0) {
+    console.log("achtung!");
+    // new orbit
+    const issOrbitPoints = await getIssOrbit();
+    const issOrbit = plotIssOrbit(issOrbitPoints);
+    scene.add(issOrbit);
+    scene.remove(scene.children.filter(({ name }) => name === "orbit")[0]);
+  }
+  previousCoords = coordinates;
+}, 5000);
 setInterval(updateSunPosition, 15 * 60 * 1000);
 
 // Controls
@@ -125,7 +146,7 @@ const tick = () => {
   }
 
   iss.material.size = 40 + 10 * Math.sin(elapsedTime * 2);
-  
+
   // Update controls
   controls.update();
 
