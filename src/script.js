@@ -80,15 +80,18 @@ loadingManager.onLoad = async () => {
     distance = Math.round(controls.getDistance());
   }
 
-  navigator.geolocation.getCurrentPosition(
-    ({ coords: { latitude, longitude } }) => {
-      const geolocationMarker = makeMarker({
-        latitude,
-        longitude,
-      });
-      scene.add(geolocationMarker);
-    }
-  );
+  if ("geolocation" in navigator) {
+    console.log("hhh")
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        const geolocationMarker = makeMarker({
+          latitude,
+          longitude,
+        });
+        scene.add(geolocationMarker);
+      }
+    );
+  }
 
   scene.add(stars, earth, clouds, iss, issOrbit, sun, ambientLight);
   for (const marker of markers) {

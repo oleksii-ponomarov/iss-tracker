@@ -3,9 +3,6 @@ import * as THREE from "three";
 import { convertLatLongToXYZ } from "../utils";
 import { getSunLong, getSunLat } from "./light";
 import { earthRadius } from "./earth";
-import { textureLoader } from "../loading/manager";
-
-const markerTexture = textureLoader.load("./textures/marker.png");
 
 const markerGeometry = new THREE.SphereGeometry(0.08, 30, 30);
 const markerMaterial = new THREE.MeshBasicMaterial({ color: "#FF0000" });
