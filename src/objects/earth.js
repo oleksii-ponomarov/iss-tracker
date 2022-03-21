@@ -14,7 +14,7 @@ const earthCloudsTexture = textureLoader.load(
   "./textures/earth/testClouds.jpg"
 );
 
-const earthRadius = 63.71;
+export const earthRadius = 63.71;
 
 const earthGeometry = new THREE.SphereGeometry(earthRadius, 60, 60);
 const earthMaterial = new THREE.MeshStandardMaterial({

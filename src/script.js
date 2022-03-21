@@ -7,7 +7,7 @@ import loadingManager, { onLoad } from "./loading/manager";
 import initializeLoading from "./loading/status";
 import earth, { clouds } from "./objects/earth";
 import stars from "./objects/stars";
-import markers from "./objects/markers";
+import markers, { makeMarker } from "./objects/markers";
 import iss, {
   getIssOrbit,
   plotIssOrbit,
@@ -79,6 +79,16 @@ loadingManager.onLoad = async () => {
     controls.update();
     distance = Math.round(controls.getDistance());
   }
+
+  navigator.geolocation.getCurrentPosition(
+    ({ coords: { latitude, longitude } }) => {
+      const geolocationMarker = makeMarker({
+        latitude,
+        longitude,
+      });
+      scene.add(geolocationMarker);
+    }
+  );
 
   scene.add(stars, earth, clouds, iss, issOrbit, sun, ambientLight);
   for (const marker of markers) {

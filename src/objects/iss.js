@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { getLatLngObj, getGroundTracks } from "tle.js";
+import { getGroundTracks } from "tle.js";
 
 import { convertLatLongToXYZ } from "../utils";
 import earth from "./earth";
