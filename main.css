@@ -1,0 +1,46 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+.loading {
+    color: #FFFFFF;
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.loading-progress {
+    margin-top: 10px;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.loading-bar {
+    height: 3px;
+    background-color: #FFFFFF;
+    width: 0;
+    transition: width 0.3s;
+}
+
+/*# sourceMappingURL=main.css.map*/
