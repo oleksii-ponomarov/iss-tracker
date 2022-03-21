@@ -67,7 +67,7 @@ loadingManager.onLoad = async () => {
   onLoad();
   if (coordinates?.latitude || coordinates?.longitude) {
     const cameraPosition = convertLatLongToXYZ(
-      40,
+      earth.geometry.parameters.radius + 200,
       coordinates.latitude > 0
         ? Math.min(coordinates.latitude, 20)
         : Math.max(coordinates.latitude, -20),
@@ -103,8 +103,8 @@ setInterval(updateSunPosition, 15 * 60 * 1000);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enablePan = false;
-controls.minDistance = 15;
-controls.maxDistance = 80;
+controls.minDistance = earth.geometry.parameters.radius + 20;
+controls.maxDistance = earth.geometry.parameters.radius + 250;
 
 let distance = Math.round(controls.getDistance());
 

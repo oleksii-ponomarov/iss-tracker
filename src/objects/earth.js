@@ -14,7 +14,9 @@ const earthCloudsTexture = textureLoader.load(
   "./textures/earth/testClouds.jpg"
 );
 
-const earthGeometry = new THREE.SphereGeometry(10, 60, 60);
+const earthRadius = 63.71;
+
+const earthGeometry = new THREE.SphereGeometry(earthRadius, 60, 60);
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: earthColorTexture,
   metalnessMap: earthMetalnessTexture,
@@ -25,7 +27,7 @@ earthMaterial.roughness = 0.55;
 
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 
-const earthCloudsGeometry = new THREE.SphereGeometry(10.1, 60, 60);
+const earthCloudsGeometry = new THREE.SphereGeometry(earthRadius + 0.5, 60, 60);
 const earthCloudsMaterial = new THREE.MeshStandardMaterial({
   map: earthCloudsTexture,
   alphaMap: earthCloudsAlphaTexture,

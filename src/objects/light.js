@@ -33,7 +33,7 @@ export function getSunLat() {
 export function updateSunPosition() {
   const sunLong = getSunLong();
   const sunLat = getSunLat();
-  const sunPosition = convertLatLongToXYZ(300, sunLat, sunLong);
+  const sunPosition = convertLatLongToXYZ(1000, sunLat, sunLong);
   sun.position.x = sunPosition.x;
   sun.position.y = sunPosition.y;
   sun.position.z = sunPosition.z;

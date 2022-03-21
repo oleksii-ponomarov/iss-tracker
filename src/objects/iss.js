@@ -8,7 +8,7 @@ import { textureLoader } from "../loading/manager";
 const issApi = "https://api.wheretheiss.at/v1/satellites/25544";
 const issTleApi =
   "https://api.wheretheiss.at/v1/satellites/25544/tles?format=text";
-const issOrbitHeight = earth.geometry.parameters.radius + 0.3;
+const issOrbitHeight = earth.geometry.parameters.radius + 4;
 
 const issColorTexture = textureLoader.load("./textures/iss/color.png");
 const issAlphaTexture = textureLoader.load("./textures/iss/alpha.png");
